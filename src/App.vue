@@ -1,158 +1,168 @@
 <template>
 	<div id="app">
-		<b-container>
-			<comp-title />
+    <div class="container">
 
-			<b-row>
-				<comp-control 
-					v-bind:orderBy="orderBy"
-					v-bind:orderDir="orderDir"
-					v-bind:strSearch="strSearch"
-					v-on:handleSort="handleSort"
-					v-on:handleSearch="handleSearch"
-				/>
+      <!-- TITLE : START -->
+      <div class="page-header">
+        <h1>Project 01 - ToDo List <small>VueJs</small></h1>
+        <hr class="my-4">
+      </div>
+      <!-- TITLE : END -->
 
-				<comp-form 
-					v-bind:isShowForm="isShowForm"
-					v-on:toggleForm="toggleForm"
-				/>
-			</b-row>
+      <div class="row">
+        <!-- CONTROL (SEARCH + SORT + ADD) : START -->
+        <div class="col-12 col-lg-6">
+          <div class="row">
+            <!-- SORT : START -->
+            <div class="col-12">
+              <div class="form-group">
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Name ASC</a>
+                    <a class="dropdown-item" href="#">Name DESC</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Level ASC</a>
+                    <a class="dropdown-item" href="#">Level DESC</a>
+                  </div>
+                  <span class="badge badge-success badge-medium">NAME - DESC</span>
+                </div>
+              </div>
+            </div>
+            <!-- SORT : END -->
 
-			<todo-list-table 
-				v-bind:listTask="listTaskSort"
-				v-on:handleDelete="handleDelete"
-			/>
-		</b-container>
+            <!-- SEARCH : START -->
+            <div class="col-12">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." />
+                <span class="input-group-append">
+                  <button class="btn btn-info" type="button">Clear!</button>
+                </span>
+              </div>
+            </div>
+            <!-- SEARCH : END -->
+          </div>
+        </div>
+        <!-- CONTROL (SEARCH + SORT + ADD) : END -->
+
+        <!-- FORM : START -->
+        <div class="col-12 col-lg-6">
+          <!-- ADD : START -->
+          <div class="form-group add-task">
+            <button type="button" class="btn btn-info btn-block">Add Task</button>
+          </div>
+          <!-- ADD : END -->
+
+          <form action="" method="POST" class="form-inline justify-content-between">
+            <div class="form-group">
+              <label class="sr-only" for="">label</label>
+              <input type="text" class="form-control" placeholder="Task Name" />
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="">label</label>
+              <select name="ds" class="form-control" required="required">
+                <option value="0">Small</option>
+                <option value="1">Medium</option>
+                <option value="2">High</option>
+              </select>
+            </div>
+
+            <button type="button" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary">Cancel</button>
+          </form>
+        </div>
+        <!-- FORM : END -->
+      </div>
+
+      <!-- LIST : START -->
+
+      <div class="panel panel-success">
+        <div class="panel-heading">List Task</div>
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th style="width: 10%" class="text-center">#</th>
+              <th>Task</th>
+              <th style="width: 20%" class="text-center">Level</th>
+              <th style="width: 160px">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="text-center">1</td>
+              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+              <td class="text-center"><span class="badge badge-danger">High</span></td>
+              <td>
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">2</td>
+              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+              <td class="text-center"><span class="badge badge-secondary">Small</span></td>
+              <td>
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">3</td>
+              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+              <td class="text-center"><span class="badge badge-info">Medium</span></td>
+              <td>
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
 	</div>
 </template>
 
 <script>
-/*
-App
-	CompForm
-		FormAdd -> click 
-			-> Run onClickAddTask() 
-			-> Kích hoạt Event handleAddTask 
-			-> Kích hoạt tiếp toggleForm
-
-*/
-// Lưu dũ liệu -> Không cần -> Mock Data, Fake Data
-import TodoListTable from './components/TodoListTable';
-import CompTitle from './components/CompTitle';
-import CompControl from './components/CompControl';
-import CompForm from './components/CompForm';
-
-import listTask from './mocks/tasks';
 
 export default {
 	name: 'app',
-	components: {
-		CompForm,
-		CompTitle,
-		CompControl,
-		TodoListTable
-	},
+	
 	data () {
 		return {
-			listTask: listTask,
-			isShowForm: false,
-			strSearch: '',
-			orderBy: 'name',
-			orderDir: 'asc'
-		}
-	},
-	computed: {
-		listTaskSearch() {
-			const { strSearch } = this;
-			
-			var newItems = this.listTask.filter(item => {
-				return item.name.toLowerCase().includes(strSearch.toLowerCase());
-			});
-			// this.listTask.forEach(function(item, index) {
-			// 	let lowerName = item.name.toLowerCase();
-			// 	let lowerSubString = strSearch.toLowerCase();
-			// 	if(lowerName.includes(lowerSubString)) 
-			// 		newItems.push(item);
-				
-			// });
-			return newItems;
-		},
-		listTaskSort() {
-			var listTask = [...this.listTaskSearch];
-				listTask.sort(this.compareSort);
-				
-			return listTask;
-		}
-	},
-	// created() {
-	// 	console.log('created task = ', listTask);
-	// },
-	methods: {
-		handleDelete(taskDelete) {
-			// Cách 1
-			this.listTask = this.listTask.filter(item => item.id !== taskDelete.id);
-
-			// Cách 2
-			// var idxDelete = -1;
-			// for(var index = 0; index < this.listTask.length; index++) {
-			// 	if(this.listTask[index].id === taskDelete.id) {
-			// 		idxDelete = index;
-			// 		break;
-			// 	}
-			// }
-			// if(idxDelete !== -1) this.listTask.splice(idxDelete, 1);
-
-			console.log("handleDelete App.vue: ", taskDelete);
-		},
-		compareSort(a, b) {
-			var numberSort = this.orderDir === 'asc' ? -1 : 1;
-			
-			if(a[this.orderBy] < b[this.orderBy]) return numberSort;
-			else if(a[this.orderBy] > b[this.orderBy]) return numberSort * (-1);
-			return 0;
-		},
-		handleSort(data) {
-			this.orderBy = data.orderBy;
-			this.orderDir = data.orderDir;
-			console.log('handleSort App.vue', data);
-		},
-		handleSearch(data) {
-			this.strSearch = data;
-			console.log('handleSearch App.vue: ', data)
-		},
-		toggleForm() {
-			console.log('toggleForm App.vue');
-			this.isShowForm = !this.isShowForm;
 		}
 	}
 }
 </script>
 
 <style>
-body {
+  body {
     padding: 100px 0;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  }
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     vertical-align: middle;
-}
+  }
 
-.container > .row {
+  .container > .row {
     margin-top: 20px;
     margin-bottom: 30px;
-}
+  }
 
-span.badge-medium {
-	padding: 11px 10px;
+  span.badge-medium {
+    padding: 11px 10px;
     margin: 0px 8px;
     font-size: 16px;
     display: inline-block;
     vertical-align: top;
-}
+  }
 
-@media (max-width: 992px) {
+  @media (max-width: 992px) {
     .add-task {
         margin-top: 50px;
     }
-}
-
+  }
 </style>

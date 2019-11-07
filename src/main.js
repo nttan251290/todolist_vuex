@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
+import BootstrapVue from 'bootstrap-vue'
 
-import './plugins'; // Tự động tìm tới file index.js
+Vue.use(BootstrapVue)
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 new Vue({
   el: '#app',
