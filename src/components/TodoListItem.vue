@@ -1,49 +1,24 @@
 <template>
-    <tr>
-        <td class="text-center">{{ index }}</td>
-        <td>{{ task.name }}</td>
-        <td class="text-center">
-            <span class="badge" v-bind:class="classLevel">{{ getLevelName }}</span></td>
-        <td>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <button 
-                v-on:click="handleDelete"
-                type="button" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
+  <tr>
+    <td class="text-center">1</td>
+    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+    <td class="text-center"><span class="badge badge-danger">High</span></td>
+    <td>
+      <button type="button" class="btn btn-warning">Edit</button>
+      <button type="button" class="btn btn-danger">Delete</button>
+    </td>
+  </tr>
 </template>
 
 <script>
-import mapLevel from '../mocks/level.js';
 export default {
-    name: 'todo-list-item',
-    props: {
-        task: { type: Object, default: null },
-        index: Number
-    },
-    // created() {
-    //     console.log('TodoListItem Maplevel = ',mapLevel)
-    // },
-    computed: {
-        getLevelName() {
-            return this.mapLevel[this.task.level].name;
-        },
-        classLevel() {
-            return this.mapLevel[this.task.level].class;
-        }
-    },
-    data() {
-        return {
-            mapLevel: mapLevel
-        }
-    },
-    methods: {
-        handleDelete() {
-            if(confirm('Bạn có muốn xóa task có tên là ' + this.task.name)) {
-                this.$emit('handleDelete', this.task);
-            }
-        }
+  name: 'todo-list-item',
+
+  data() {
+    return {
+
     }
+  }
 }
 </script>
 

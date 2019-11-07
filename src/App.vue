@@ -72,60 +72,21 @@
       </div>
 
       <!-- LIST : START -->
-
-      <div class="panel panel-success">
-        <div class="panel-heading">List Task</div>
-        <table class="table table-hover ">
-          <thead>
-            <tr>
-              <th style="width: 10%" class="text-center">#</th>
-              <th>Task</th>
-              <th style="width: 20%" class="text-center">Level</th>
-              <th style="width: 160px">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td class="text-center">1</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
-              <td class="text-center"><span class="badge badge-danger">High</span></td>
-              <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">2</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
-              <td class="text-center"><span class="badge badge-secondary">Small</span></td>
-              <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">3</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
-              <td class="text-center"><span class="badge badge-info">Medium</span></td>
-              <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-
-        </table>
-      </div>
+      <todo-list-table />
     </div>
 	</div>
 </template>
 
 <script>
 
+import TodoListTable from './components/TodoListTable'
+
 export default {
 	name: 'app',
-	
+  components: {
+    TodoListTable
+  },
+
 	data () {
 		return {
 		}
