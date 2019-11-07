@@ -1,6 +1,4 @@
 <template>
-  <!-- LIST : START -->
-
   <div class="card panel-success">
     <div class="card-header">List Task</div>
     <table class="table table-hover ">
