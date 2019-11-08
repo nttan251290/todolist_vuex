@@ -1,12 +1,12 @@
 <template>
 	<div id="app">
-    <div class="container">
+    <b-container>
 
       <!-- TITLE : START -->
       <comp-title />
       <!-- TITLE : END -->
 
-      <div class="row">
+      <b-row>
         <!-- CONTROL (SEARCH + SORT + ADD) : START -->
         <comp-control />
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
@@ -14,12 +14,12 @@
         <!-- FORM : START -->
         <comp-form />
         <!-- FORM : END -->
-      </div>
+      </b-row>
 
       <!-- LIST : START -->
-      <todo-list-table />
+      <todo-list-table v-bind:listTask="listTask"/>
       <!-- LIST : END -->
-    </div>
+    </b-container>
 	</div>
 </template>
 
@@ -41,6 +41,28 @@ export default {
 
 	data () {
 		return {
+      listTask: [
+        {
+          id: 1,
+          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 1',
+          level: 0 // Small
+        },
+        {
+          id: 2,
+          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 2',
+          level: 1 // Medium
+        },
+        {
+          id: 3,
+          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 3',
+          level: 2 // Height
+        },
+        {
+          id: 4,
+          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 4',
+          level: 0 // Small
+        }
+      ]
 		}
 	}
 }

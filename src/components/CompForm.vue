@@ -1,9 +1,7 @@
 <template>
-  <div class="col-12 col-lg-6">
+  <b-col cols="12" lg="6">
     <!-- ADD : START -->
-    <div class="form-group add-task">
-      <button type="button" class="btn btn-info btn-block">Add Task</button>
-    </div>
+    <form-add />
     <!-- ADD : END -->
 
     <form action="" method="POST" class="form-inline justify-content-between">
@@ -23,12 +21,19 @@
       <button type="button" class="btn btn-primary">Submit</button>
       <button type="button" class="btn btn-secondary">Cancel</button>
     </form>
-  </div>
+  </b-col>
 </template>
 
 <script>
+import FormAdd from './FormAdd'
+
 export default {
   name: 'comp-form',
+
+  components: {
+    FormAdd
+  },
+
   data() {
     return {
       
