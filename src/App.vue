@@ -30,6 +30,8 @@ import CompControl from './components/CompControl'
 import TodoListTable from './components/TodoListTable'
 import CompForm from './components/CompForm'
 
+import listTask from './mocks/tasks'
+
 export default {
 	name: 'app',
   components: {
@@ -41,28 +43,7 @@ export default {
 
 	data () {
 		return {
-      listTask: [
-        {
-          id: 1,
-          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 1',
-          level: 0 // Small
-        },
-        {
-          id: 2,
-          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 2',
-          level: 1 // Medium
-        },
-        {
-          id: 3,
-          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 3',
-          level: 2 // Height
-        },
-        {
-          id: 4,
-          taskName: '	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c 4',
-          level: 0 // Small
-        }
-      ]
+      listTask
 		}
 	}
 }
