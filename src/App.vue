@@ -8,7 +8,10 @@
 
       <b-row>
         <!-- CONTROL (SEARCH + SORT + ADD) : START -->
-        <comp-control />
+        <comp-control
+          v-on:handleSearch="handleSearch"
+          v-bind:strSearch="strSearch"
+        />
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
 
         <!-- FORM : START -->
@@ -46,7 +49,8 @@ export default {
 	data () {
 		return {
       isShowForm: false,
-      listTask
+      listTask,
+      strSearch: ''
 		}
   },
   
@@ -54,6 +58,11 @@ export default {
     toggleForm() {
       console.log('App.vue: toggleForm');
       this.isShowForm = !this.isShowForm;
+    },
+
+    handleSearch(data) {
+      this.strSearch = data;
+      console.log('handleSearch App.vue: ', data);
     }
   }
 }
