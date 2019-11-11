@@ -59,9 +59,9 @@ export default {
       const { strSearch } = this;
       let newItems = [];
       this.listTask.forEach(function(item, index) {
-        if(item.name.includes(strSearch)) {
-          newItems.push(item);
-        }
+        let lowerName = item.name.toLowerCase();
+        let lowerStrSearch = strSearch.toLowerCase();
+        if(lowerName.includes(lowerStrSearch)) newItems.push(item);
       });
 
       return newItems;

@@ -11,7 +11,7 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody v-if="listTask.length !== 0">
         <todo-list-item 
           v-for="(task, index) in listTask" 
           v-bind:key="index"
@@ -19,7 +19,11 @@
           v-bind:index="index + 1"
         />
       </tbody>
-
+      <tbody v-else>
+        <tr>
+          <td colspan="4">List Empty</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
