@@ -1,6 +1,8 @@
 <template>
   <div class="form-group add-task">
-    <button type="button" class="btn btn-info btn-block">Add Task</button>
+    <button
+      v-on:click="onClickAddTask"
+      type="button" class="btn btn-info btn-block">Add Task</button>
   </div>
 </template>
 
@@ -10,6 +12,12 @@ export default {
   data() {
     return {
       
+    }
+  },
+  methods: {
+    onClickAddTask() {
+      console.log('FormAdd.Vue : button Add Task click ');
+      this.$emit('handleAddTask');
     }
   }
 }

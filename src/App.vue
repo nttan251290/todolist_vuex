@@ -12,7 +12,9 @@
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
 
         <!-- FORM : START -->
-        <comp-form />
+        <comp-form 
+          v-bind:isShowForm="isShowForm" 
+          v-on:toggleForm="toggleForm"/>
         <!-- FORM : END -->
       </b-row>
 
@@ -43,9 +45,17 @@ export default {
 
 	data () {
 		return {
+      isShowForm: false,
       listTask
 		}
-	}
+  },
+  
+  methods: {
+    toggleForm() {
+      console.log('App.vue: toggleForm');
+      this.isShowForm = !this.isShowForm;
+    }
+  }
 }
 </script>
 

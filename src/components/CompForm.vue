@@ -1,10 +1,10 @@
 <template>
   <b-col cols="12" lg="6">
     <!-- ADD : START -->
-    <form-add />
+    <form-add v-on:handleAddTask="handleAddTask" />
     <!-- ADD : END -->
 
-    <form action="" method="POST" class="form-inline justify-content-between">
+    <form v-if="isShowForm" action="" method="POST" class="form-inline justify-content-between">
       <div class="form-group">
         <label class="sr-only" for="">label</label>
         <input type="text" class="form-control" placeholder="Task Name" />
@@ -34,9 +34,20 @@ export default {
     FormAdd
   },
 
+  props: {
+    isShowForm: { type: Boolean, default: false }
+  },
+
   data() {
     return {
       
+    }
+  },
+
+  methods: {
+    handleAddTask() {
+      console.log('CompForm.vue: handleAddTask');
+      this.$emit('toggleForm');
     }
   }
 }
