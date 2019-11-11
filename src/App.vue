@@ -22,7 +22,7 @@
       </b-row>
 
       <!-- LIST : START -->
-      <todo-list-table v-bind:listTask="listTask"/>
+      <todo-list-table v-bind:listTask="listTaskSearch"/>
       <!-- LIST : END -->
     </b-container>
 	</div>
@@ -54,6 +54,20 @@ export default {
 		}
   },
   
+  computed: {
+    listTaskSearch() {
+      const { strSearch } = this;
+      let newItems = [];
+      this.listTask.forEach(function(item, index) {
+        if(item.name.includes(strSearch)) {
+          newItems.push(item);
+        }
+      });
+
+      return newItems;
+    }
+  },
+
   methods: {
     toggleForm() {
       console.log('App.vue: toggleForm');
