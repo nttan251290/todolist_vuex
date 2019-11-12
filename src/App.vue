@@ -25,7 +25,7 @@
       </b-row>
 
       <!-- LIST : START -->
-      <todo-list-table v-bind:listTask="listTaskSearch"/>
+      <todo-list-table v-bind:listTask="listTaskSort"/>
       <!-- LIST : END -->
     </b-container>
 	</div>
@@ -66,10 +66,39 @@ export default {
         return item.name.toLowerCase().includes(strSearch.toLowerCase());
       });
       return newItems;
+    },
+
+    listTaskSort() {
+      let listTask = [...this.listTaskSearch];
+
+      if(this.orderBy === 'name') {
+        listTask.sort(this.compareName);
+      } else if(this.orderBy === 'level') {
+        listTask.sort(this.compareLevel);
+      }
+
+      return listTask;
     }
+
   },
 
   methods: {
+    compareName(a, b) {
+      let numberSort = this.orderDir === 'asc' ? -1 : 1;
+
+      if(a.name < b.name) return numberSort
+      else if(a.name > b.name) return numberSort * (-1)
+      return 0;
+    },
+
+    compareLevel(a, b) {
+      let numberSort = this.orderDir === 'asc' ? -1 : 1;
+
+      if(a.level < b.level) return numberSort
+      else if(a.level > b.level) return numberSort * (-1)
+      return 0;
+    },
+
     toggleForm() {
       console.log('App.vue: toggleForm');
       this.isShowForm = !this.isShowForm;
