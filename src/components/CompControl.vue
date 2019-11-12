@@ -2,7 +2,10 @@
   <div class="col-12 col-lg-6">
     <div class="row">
       <!-- SORT : START -->
-      <control-sort />
+      <control-sort 
+        v-bind:orderBy="orderBy"
+        v-bind:orderDir="orderDir"
+      />
       <!-- SORT : END -->
 
       <!-- SEARCH : START -->
@@ -28,7 +31,9 @@ export default {
   },
 
   props: {
-    strSearch: { type: String, default: '' }
+    strSearch: { type: String, default: '' },
+    orderBy: { type: String, default: '' },
+    orderDir: { type: String, default: '' }
   },
 
   data() {

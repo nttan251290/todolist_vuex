@@ -9,6 +9,8 @@
       <b-row>
         <!-- CONTROL (SEARCH + SORT + ADD) : START -->
         <comp-control
+          v-bind:orderBy="orderBy"
+          v-bind:orderDir="orderDir"
           v-on:handleSearch="handleSearch"
           v-bind:strSearch="strSearch"
         />
@@ -50,7 +52,9 @@ export default {
 		return {
       isShowForm: false,
       listTask,
-      strSearch: ''
+      strSearch: '',
+      orderBy: 'level',
+      orderDir: 'asc'
 		}
   },
   
