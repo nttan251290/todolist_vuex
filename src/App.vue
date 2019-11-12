@@ -70,32 +70,18 @@ export default {
 
     listTaskSort() {
       let listTask = [...this.listTaskSearch];
-
-      if(this.orderBy === 'name') {
-        listTask.sort(this.compareName);
-      } else if(this.orderBy === 'level') {
-        listTask.sort(this.compareLevel);
-      }
-
+      listTask.sort(this.compareSort);
       return listTask;
     }
 
   },
 
   methods: {
-    compareName(a, b) {
+    compareSort(a, b) {
       let numberSort = this.orderDir === 'asc' ? -1 : 1;
 
-      if(a.name < b.name) return numberSort
-      else if(a.name > b.name) return numberSort * (-1)
-      return 0;
-    },
-
-    compareLevel(a, b) {
-      let numberSort = this.orderDir === 'asc' ? -1 : 1;
-
-      if(a.level < b.level) return numberSort
-      else if(a.level > b.level) return numberSort * (-1)
+      if(a[this.orderBy] < b[this.orderBy]) return numberSort
+      else if(a[this.orderBy] > b[this.orderBy]) return numberSort * (-1)
       return 0;
     },
 
