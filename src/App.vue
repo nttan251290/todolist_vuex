@@ -57,13 +57,9 @@ export default {
   computed: {
     listTaskSearch() {
       const { strSearch } = this;
-      let newItems = [];
-      this.listTask.forEach(function(item, index) {
-        let lowerName = item.name.toLowerCase();
-        let lowerStrSearch = strSearch.toLowerCase();
-        if(lowerName.includes(lowerStrSearch)) newItems.push(item);
+      let newItems = this.listTask.filter(item => {
+        return item.name.toLowerCase().includes(strSearch.toLowerCase());
       });
-
       return newItems;
     }
   },
