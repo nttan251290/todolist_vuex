@@ -12,6 +12,7 @@
           v-bind:orderBy="orderBy"
           v-bind:orderDir="orderDir"
           v-on:handleSearch="handleSearch"
+          v-on:handleSort="handleSort"
           v-bind:strSearch="strSearch"
         />
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
@@ -77,6 +78,12 @@ export default {
     handleSearch(data) {
       this.strSearch = data;
       console.log('handleSearch App.vue: ', data);
+    },
+
+    handleSort(data) {
+      this.orderBy = data.orderBy;
+      this.orderDir = data.orderDir;
+      console.log('handleSort App.vue', data);
     }
   }
 }

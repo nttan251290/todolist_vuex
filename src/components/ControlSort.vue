@@ -27,8 +27,9 @@ export default {
     }
   },
   methods: {
-    handleSort(oderBy, oderDir) {
-      console.log(oderBy, ' - ', oderDir)
+    handleSort(orderBy, orderDir) {
+      let data = { orderBy, orderDir };
+      this.$emit('handleSort', { orderBy, orderDir});
     }
   }
 }
