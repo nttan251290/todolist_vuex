@@ -103,8 +103,9 @@ export default {
       console.log('handleSort App.vue', data);
     },
 
-    handleDelete(data) {
-      console.log('handleDelete App.vue', data);
+    handleDelete(taskDelete) {
+      this.listTask = this.listTask.filter(item => item.id !== taskDelete.id);
+      console.log('handleDelete App.vue', taskDelete);
     }
   }
 }
