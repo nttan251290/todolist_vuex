@@ -25,7 +25,9 @@
       </b-row>
 
       <!-- LIST : START -->
-      <todo-list-table v-bind:listTask="listTaskSort"/>
+      <todo-list-table
+        v-on:handleDelete="handleDelete"
+        v-bind:listTask="listTaskSort"/>
       <!-- LIST : END -->
     </b-container>
 	</div>
@@ -99,6 +101,10 @@ export default {
       this.orderBy = data.orderBy;
       this.orderDir = data.orderDir;
       console.log('handleSort App.vue', data);
+    },
+
+    handleDelete(data) {
+      console.log('handleDelete App.vue', data);
     }
   }
 }
