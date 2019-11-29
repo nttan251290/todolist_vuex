@@ -66,6 +66,14 @@ export default {
 		}
   },
   
+  watch: {
+    listTask: function(newTasks) {
+      let tasksString = JSON.stringify(newTasks)
+      localStorage.setItem('tasks', tasksString)
+      console.log('watch listTasks : ', tasksString)
+    }
+  },
+
   computed: {
     listTaskSearch() {
       const { strSearch } = this;
@@ -81,6 +89,17 @@ export default {
       return listTask;
     }
 
+  },
+
+  created() {
+    // Lấy listTask từ trong localStorage
+    console.log(localStorage.getItem('tasks'))
+    let tasks = localStorage.getItem('tasks')
+    if (tasks !== null) {
+      this.listTask = JSON.parse(tasks)
+    } else {
+      this.listTask = []
+    }
   },
 
   methods: {
