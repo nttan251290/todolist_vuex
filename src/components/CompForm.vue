@@ -3,24 +3,24 @@
     <!-- ADD : START -->
     <form-add
       v-bind:isShowForm="isShowForm"
-      v-on:handleAddTask="handleAddTask" />
+      v-on:handleToggleForm="handleToggleForm" />
     <!-- ADD : END -->
 
     <form v-if="isShowForm" action="" method="POST" class="form-inline justify-content-between">
       <div class="form-group">
         <label class="sr-only" for="">label</label>
-        <input type="text" class="form-control" placeholder="Task Name" />
+        <input v-model="taskName" type="text" class="form-control" placeholder="Task Name" />
       </div>
       <div class="form-group">
         <label class="sr-only" for="">label</label>
-        <select name="ds" class="form-control" required="required">
+        <select v-model="level" name="ds" class="form-control" required="required">
           <option value="0">Small</option>
           <option value="1">Medium</option>
           <option value="2">High</option>
         </select>
       </div>
 
-      <button type="button" class="btn btn-primary">Submit</button>
+      <button v-on:click="handleAddNew" type="button" class="btn btn-primary">Submit</button>
       <button v-on:click="handleCancel" type="button" class="btn btn-secondary">Cancel</button>
     </form>
   </b-col>
@@ -28,6 +28,7 @@
 
 <script>
 import FormAdd from './FormAdd'
+import uuidv4 from 'uuid/v4'
 
 export default {
   name: 'comp-form',
@@ -37,20 +38,45 @@ export default {
   },
 
   props: {
-    isShowForm: { type: Boolean, default: false }
+    isShowForm: { type: Boolean, default: false },
+    taskSelected: { type: Object, default: null }
   },
 
   data() {
     return {
-      
+      taskName: '',
+      level: 0
     }
   },
 
+  beforeUpdate() {
+    if(this.taskSelected !== null) {
+      this.taskName = this.taskSelected.taskName
+      this.level = this.taskSelected.level
+    }
+    console.log('beforeUpdate: ', this.taskSelected)
+  },
+
   methods: {
-    handleAddTask() {
+    handleAddNew() {
+      let objTask = {
+        id: uuidv4,
+        name: this.taskName,
+        level: parseInt(this.level)
+      }
+
+      // Kiem tra du kieu hop le ???
+      this.$emit('handleAddNewTask', objTask);
+      this.taskName = '',
+      this.level = 0;
+      this.handleCancel();
+    },
+
+    handleToggleForm() {
       console.log('CompForm.vue: handleAddTask');
       this.$emit('toggleForm');
     },
+
     handleCancel() {
       this.$emit('toggleForm');
       // Xu ly data

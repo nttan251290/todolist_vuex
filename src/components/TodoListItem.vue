@@ -4,7 +4,9 @@
     <td>{{task.name}}</td>
     <td class="text-center"><span class="badge" v-bind:class="classLevel">{{getLevelName}}</span></td>
     <td>
-      <button type="button" class="btn btn-warning">Edit</button>
+      <button
+        v-on:click="handleEdit"
+        type="button" class="btn btn-warning">Edit</button>
       <button type="button" class="btn btn-danger" v-on:click="handleDelete">Delete</button>
     </td>
   </tr>
@@ -38,6 +40,11 @@ export default {
   },
 
   methods: {
+    handleEdit() {
+      console.log('handleEdit TodoListItem.vue');
+      this.$emit('handleEdit', this.task);
+    },
+
     handleDelete() {
       if(confirm('Do you want to delete this tak ?')) {
         console.log('handledelete TodoListItem.vue');

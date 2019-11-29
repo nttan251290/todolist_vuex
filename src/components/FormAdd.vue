@@ -25,7 +25,7 @@ export default {
   methods: {
     onClickAddTask() {
       console.log('FormAdd.Vue : button Add Task click ');
-      this.$emit('handleAddTask');
+      this.$emit('handleToggleForm');
     }
   }
 }

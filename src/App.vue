@@ -20,12 +20,15 @@
         <!-- FORM : START -->
         <comp-form 
           v-bind:isShowForm="isShowForm" 
-          v-on:toggleForm="toggleForm"/>
+          v-bind:taskSelected="taskSelected"
+          v-on:toggleForm="toggleForm"
+          v-on:handleAddNewTask="handleAddNewTask"/>
         <!-- FORM : END -->
       </b-row>
 
       <!-- LIST : START -->
       <todo-list-table
+        v-on:handleEdit="handleEdit"
         v-on:handleDelete="handleDelete"
         v-bind:listTask="listTaskSort"/>
       <!-- LIST : END -->
@@ -57,7 +60,8 @@ export default {
       listTask,
       strSearch: '',
       orderBy: 'level',
-      orderDir: 'asc'
+      orderDir: 'asc',
+      taskSelected: null
 		}
   },
   
@@ -79,6 +83,17 @@ export default {
   },
 
   methods: {
+    handleAddNewTask(newTask) {
+      console.log('handleAddNewTask App.vue', newTask);
+      this.listTask.push(newTask);
+    },
+
+    handleEdit(taskEdit) {
+      this.taskSelected = taskEdit
+      this.isShowForm = true
+      console.log('handleEdit App.vue', taskEdit);
+    },
+
     compareSort(a, b) {
       let numberSort = this.orderDir === 'asc' ? -1 : 1;
 
@@ -88,6 +103,7 @@ export default {
     },
 
     toggleForm() {
+      if(this.isShowForm) this.taskSelected = null
       console.log('App.vue: toggleForm');
       this.isShowForm = !this.isShowForm;
     },
