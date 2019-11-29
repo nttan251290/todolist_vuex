@@ -20,7 +20,16 @@
         </select>
       </div>
 
-      <button v-on:click="handleAddNew" type="button" class="btn btn-primary">Submit</button>
+      <button 
+        v-if="taskSelected === null"
+        v-on:click="handleAddNew" type="button" 
+        class="btn btn-primary">Submit</button>
+
+      <button
+        v-else
+        v-on:click="handleEditTask" type="button" 
+        class="btn btn-primary">Update</button>
+
       <button v-on:click="handleCancel" type="button" class="btn btn-secondary">Cancel</button>
     </form>
   </b-col>
@@ -49,15 +58,32 @@ export default {
     }
   },
 
-  beforeUpdate() {
-    if(this.taskSelected !== null) {
-      this.taskName = this.taskSelected.taskName
-      this.level = this.taskSelected.level
+  watch: {
+    taskSelected: function(newData, olddata) {
+      console.log('watch selected : ', newData, olddata)
+      if(newData) {
+        this.taskName = newData.name
+        this.level = newData.level
+      }
     }
-    console.log('beforeUpdate: ', this.taskSelected)
+  },
+
+  beforeUpdate() {
+
   },
 
   methods: {
+    handleEditTask() {
+      console.log('handleEditTask CompForm.vuew ', this.taskSelected)
+      let objTaskEdit = {
+        id: this.taskSelected.id,
+        name: this.taskName,
+        level: parseInt(this.level)
+      }
+      this.$emit('handleEditTaskById', objTaskEdit)
+      this.handleResetData()
+    },
+
     handleAddNew() {
       let objTask = {
         id: uuidv4,
@@ -67,8 +93,6 @@ export default {
 
       // Kiem tra du kieu hop le ???
       this.$emit('handleAddNewTask', objTask);
-      this.taskName = '',
-      this.level = 0;
       this.handleCancel();
     },
 
@@ -79,7 +103,13 @@ export default {
 
     handleCancel() {
       this.$emit('toggleForm');
+      this.handleResetData();
       // Xu ly data
+    },
+
+    handleResetData() {
+      this.taskName = '';
+      this.level = 0;
     }
   }
 }
